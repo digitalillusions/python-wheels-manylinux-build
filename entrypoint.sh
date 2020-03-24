@@ -25,7 +25,7 @@ for PY_VER in "${arrPY_VERSIONS[@]}"; do
     
     # Build wheels
     # /opt/python/"${PY_VER}"/bin/pip wheel /github/workspace/"${PACKAGE_PATH}" -w /github/workspace/wheelhouse/ ${PIP_WHEEL_ARGS} || { echo "Building wheels failed."; exit 1; }
-    cd /github/workspace/"{PACKAGE_PATH}"
+    cd /github/workspace/"${PACKAGE_PATH}"
     /opt/python/"${PY_VER}"/bin/python setup.py bdist_wheel -d /github/workspace/wheelhouse/ ${PIP_WHEEL_ARGS} || { echo "Building wheels failed."; exit 1; }
 done
 
