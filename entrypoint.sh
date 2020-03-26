@@ -12,6 +12,10 @@ if [ ! -z "$SYSTEM_PACKAGES" ]; then
     yum install -y ${SYSTEM_PACKAGES}  || { echo "Installing yum package(s) failed."; exit 1; }
 fi
 
+# Always install cmake3 and alias to overwrite cmake2
+yum install -y cmake3 || { echo "Installing cmake3 failed."; exit 1; }
+alias cmake=cmake3
+
 # Compile wheels
 arrPY_VERSIONS=(${PY_VERSIONS// / })
 for PY_VER in "${arrPY_VERSIONS[@]}"; do
