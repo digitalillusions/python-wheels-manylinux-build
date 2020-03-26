@@ -29,6 +29,9 @@ for PY_VER in "${arrPY_VERSIONS[@]}"; do
     /opt/python/"${PY_VER}"/bin/python setup.py bdist_wheel -d /github/workspace/wheelhouse/ ${PIP_WHEEL_ARGS} || { echo "Building wheels failed."; exit 1; }
 done
 
+# Install auditwheel
+/opt/python/cp37-cp37m/bin/pip install --upgrade --no-cache-dir auditwheel
+
 # Bundle external shared libraries into the wheels
 for whl in /github/workspace/wheelhouse/*-linux*.whl; do
     auditwheel repair "$whl" --plat "${PLAT}" -w /github/workspace/wheelhouse/ || { echo "Repairing wheels failed."; auditwheel show "$whl"; exit 1; }
